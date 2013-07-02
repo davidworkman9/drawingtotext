@@ -1,0 +1,48 @@
+Dependencies
+-----------------------
+- libreDWG & dxflib (how to install explained below)
+- build-essential
+- autoconf
+- libtool
+- python-dev
+- swig
+- texinfo
+
+How to install LibreDWG
+-----------------------
+git clone git://git.sv.gnu.org/libredwg.git
+sudo apt-get install build-essential
+sudo apt-get install autoconf
+sudo apt-get install libtool
+sudo apt-get install python-dev
+sudo apt-get install swig
+sudo apt-get install texinfo
+cd libredwg
+sh autogen.sh
+./configure --enable-trace
+make
+sudo make install
+make check
+(these steps are mostly taken from http://libreplanet.org/wiki/LibreDWG)
+
+
+How to install dxflib
+-----------------------
+From the project directory...
+cd dxflib
+./configure && make && sudo make install
+
+
+Once you've installed dxflib and LibreDWG, back up to the project directory and run "make".
+This should make an execuable file named dwgdxftotext.
+Move dwgdxftotext to /usr/local/bin (mv dwgdxftotext /usr/local/bin) so it can be accessed via the command line from anywhere.
+	- Down the road we will hopefully modify the makefile to have an install command.
+
+
+
+Misc
+-----------------------
+This is mainly just a copy of the text extraction process from the following code:
+http://www.ibm.com/developerworks/library/os-autocad/#download
+
+The code could probably have a lot of lines(and maybe whole files) removed, I haven't really gone through everything yet so I don't know what's required for the text extraction and what's not.
