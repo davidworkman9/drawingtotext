@@ -1,3 +1,8 @@
+drawingtotext is a command line utility that extracts any text from DWG/DXF files.
+Usage: drawingtotext inputfile outputfile[optional]
+
+The input file must be a DWG or DXF file. The output file must be a .txt file. If the output file is not specified the results are sent out to the console.
+
 Dependencies
 -----------------------
 - libreDWG & dxflib (how to install explained below)
