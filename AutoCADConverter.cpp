@@ -52,8 +52,12 @@ int main(int argc, char * argv[]) {
 		printf("The specified input file does not exist or is not accessible: %s\n", argv[1]);
 		return 1;
 	}
-	
-	if (inFile.substr(inFile.rfind('.')+1) == "dwg") {
+
+	if (inFile.substr(inFile.rfind('.')+1) == "dxf") {
+		input = new InputFormatDXF(argv[1]);
+		if(outFile != "")
+			printf("Setting up input file %s...\n", argv[1]);
+	} else if (inFile.substr(inFile.rfind('.')+1) == "dwg") {
 		input = new InputFormatDWG(argv[1]);
 		if(outFile != "")
 			printf("Setting up input file %s...\n", argv[1]);

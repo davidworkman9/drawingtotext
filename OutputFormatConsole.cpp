@@ -10,7 +10,8 @@ void OutputFormatConsole::addPolyLine(std::vector<OutputFeaturePoint *> newPoint
 void OutputFormatConsole::addPolygon(std::vector<OutputFeaturePoint *> newPoints) { }
 
 void OutputFormatConsole::addText(OutputFeaturePoint location, const char * text) {
-	std::cout << text << std::endl;
+	if(text[0] != '\0')
+		std::cout << text << std::endl;	
 }
 
 OutputFormatConsole::OutputFormatConsole() {

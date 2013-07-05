@@ -1,4 +1,5 @@
 #include "InputFormatDWG.h"
+#include <iostream>
 
 InputFormatDWG::InputFormatDWG(const char * inputFilename) {
 	this->dwg = new Dwg_Data();
@@ -41,12 +42,19 @@ void InputFormatDWG::dumpBlock(Dwg_Object_Ref * block) {
 	Dwg_Object * obj = get_first_owned_object(block->obj, header);
 	while (obj) {
 		if (obj->type == DWG_TYPE_TEXT) {
-			Dwg_Entity_TEXT * text = obj->tio.entity->tio.TEXT;
+									//Dwg_Object->tio.Dwg_Object_Entity->
+				Dwg_Entity_TEXT * text = obj->tio.entity->tio.TEXT;			
+				OutputFeaturePoint * newPoint = new OutputFeaturePoint();
 
-			OutputFeaturePoint * newPoint = new OutputFeaturePoint(text->insertion_pt.x + this->currentBlockX, text->insertion_pt.y + this->currentBlockY, 0);
-			this->output->addText(*newPoint, (const char *)text->text_value);
-			delete newPoint;
-		}
+				if (text->text_value[0] == '&') {
+					obj = get_next_owned_object(block->obj, obj, header);
+					continue;
+				}
+
+				if (text->text_value[0] != '&')
+					this->output->addText(*newPoint, (const char *)text->text_value);
+				delete newPoint;
+			}
 		obj = get_next_owned_object(block->obj, obj, header);
 	}
 }
