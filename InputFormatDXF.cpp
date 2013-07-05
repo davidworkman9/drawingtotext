@@ -130,6 +130,28 @@ void InputFormatDXF::addBlock(const DL_BlockData& data) {
 	}
 }
 
+std::string replaceAll( std::string const& original, std::string const& before, std::string const& after ) {
+    std::string retval;
+    std::string::const_iterator end     = original.end();
+    std::string::const_iterator current = original.begin();
+    std::string::const_iterator next    = std::search( current, end, before.begin(), before.end() );
+    while ( next != end ) {
+        retval.append( current, next );
+        retval.append( after );
+        current = next + before.size();
+        next = std::search( current, end, before.begin(), before.end() );
+    }
+    retval.append( current, next );
+    return retval;
+}
+
+void InputFormatDXF::addMText(const DL_MTextData& data) {
+	OutputFeaturePoint * newPoint = new OutputFeaturePoint(data.ipx + this->currentBlockX, data.ipy + this->currentBlockY, data.ipz);
+	std::string text = replaceAll(data.text, "\\P", " ");
+	this->output->addText(*newPoint, text.c_str());
+	delete newPoint;
+}
+
 void InputFormatDXF::addText(const DL_TextData& data) {
 	OutputFeaturePoint * newPoint = new OutputFeaturePoint(data.ipx + this->currentBlockX, data.ipy + this->currentBlockY, data.ipz);
 	this->output->addText(*newPoint, data.text.c_str());

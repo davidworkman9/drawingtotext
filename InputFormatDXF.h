@@ -8,6 +8,8 @@
 #include "dxflib/src/dl_creationadapter.h"
 #include <stdio.h>
 #include <vector>
+#include <string>
+#include <algorithm>
 
 class InputFormatDXF: public InputFormat, public DL_CreationAdapter {
 	public:
@@ -24,6 +26,7 @@ class InputFormatDXF: public InputFormat, public DL_CreationAdapter {
 		void addVertex(const DL_VertexData& data);
 		void addBlock(const DL_BlockData& data);
 		void addText(const DL_TextData& data);
+		void addMText (const DL_MTextData& data);
 		void endBlock();
 		void endEntity();
 
