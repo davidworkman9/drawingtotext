@@ -27,6 +27,7 @@ class InputFormatDXF: public InputFormat, public DL_CreationAdapter {
 		void addBlock(const DL_BlockData& data);
 		void addText(const DL_TextData& data);
 		void addMText (const DL_MTextData& data);
+		void addMTextChunk (const char * text);
 		void endBlock();
 		void endEntity();
 

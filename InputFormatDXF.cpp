@@ -145,15 +145,22 @@ std::string replaceAll( std::string const& original, std::string const& before, 
     return retval;
 }
 
+void InputFormatDXF::addMTextChunk(const char * text) {
+	OutputFeaturePoint * newPoint = new OutputFeaturePoint();
+	std::string textstr = replaceAll(std::string(text), "\\P", " ");
+	this->output->addText(*newPoint, textstr.c_str());
+	delete newPoint;
+}
+
 void InputFormatDXF::addMText(const DL_MTextData& data) {
-	OutputFeaturePoint * newPoint = new OutputFeaturePoint(data.ipx + this->currentBlockX, data.ipy + this->currentBlockY, data.ipz);
+	OutputFeaturePoint * newPoint = new OutputFeaturePoint();
 	std::string text = replaceAll(data.text, "\\P", " ");
 	this->output->addText(*newPoint, text.c_str());
 	delete newPoint;
 }
 
 void InputFormatDXF::addText(const DL_TextData& data) {
-	OutputFeaturePoint * newPoint = new OutputFeaturePoint(data.ipx + this->currentBlockX, data.ipy + this->currentBlockY, data.ipz);
+	OutputFeaturePoint * newPoint = new OutputFeaturePoint();
 	this->output->addText(*newPoint, data.text.c_str());
 	delete newPoint;
 }
