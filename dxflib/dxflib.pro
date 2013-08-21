@@ -1,17 +1,17 @@
+exists( ../mkspecs/defs.pro ):include( ../mkspecs/defs.pro )
+
 TEMPLATE = lib
 DESTDIR = lib
 CONFIG += staticlib warn_on
-CONFIG -= qt debug_and_release
-CONFIG += release
-CONFIG -= debug
+#CONFIG -= qt debug_and_release
 
 win32-msvc {
   DEFINES += _CRT_SECURE_NO_DEPRECATE
 }
 
 macx {
-  QMAKE_MAC_SDK=/Developer/SDKs/MacOSX10.5.sdk
-  CONFIG+=x86 ppc
+  QMAKE_MAC_SDK=/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.6.sdk
+  CONFIG+=x86_64 x86
 }
 
 INCLUDEPATH += src
@@ -30,4 +30,7 @@ SOURCES = \
     src/dl_dxf.cpp\
     src/dl_writer_ascii.cpp
 TARGET = libdxf
-OBJECTS_DIR = .obj
+#OBJECTS_DIR = .obj
+CONFIG(debug, debug|release) {
+    TARGET = $$join(TARGET,,,_d)
+}

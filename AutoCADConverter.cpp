@@ -30,7 +30,7 @@ int main(int argc, char * argv[]) {
 
 	std::string outFile = argc < 3 ? "" : argv[2];
 	if (outFile != "" && outFile.rfind('.') == std::string::npos) {
-		printf("I couldn't make sense of your output filename's extension: %s. Please use filename.shp, filename.kml, or filename.txt.\n", argv[2]);
+		fprintf(stderr, "I couldn't make sense of your output filename's extension: %s. Please use filename.shp, filename.kml, or filename.txt.\n", argv[2]);
 		return 1;
 	}
 
@@ -44,12 +44,12 @@ int main(int argc, char * argv[]) {
 	// Next grab the input file
 	std::string inFile = argv[1];
 	if (inFile.rfind('.') == std::string::npos) {
-		printf("I couldn't make sense of your input filename's extension: %s. Please use filename.dxf or filename.dwg.\n", argv[1]);
+		fprintf(stderr, "I couldn't make sense of your input filename's extension: %s. Please use filename.dxf or filename.dwg.\n", argv[1]);
 		delete output;
 		return 1;
 	}
 	if (stat(argv[1], &fileExists) != 0) {
-		printf("The specified input file does not exist or is not accessible: %s\n", argv[1]);
+		fprintf(stderr, "The specified input file does not exist or is not accessible: %s\n", argv[1]);
 		return 1;
 	}
 
@@ -64,11 +64,11 @@ int main(int argc, char * argv[]) {
 	}
 
 	if (!input) {
-		printf("The input file was not recognized or could not be opened.\n");
+		fprintf(stderr, "The input file was not recognized or could not be opened.\n");
 		return 1;
 	}
 	if (!output) {
-		printf("The output file was not recognized or could not be opened.\n");
+		fprintf(stderr, "The output file was not recognized or could not be opened.\n");
 		return 1;
 	}
 	if(outFile != "")
@@ -78,7 +78,7 @@ int main(int argc, char * argv[]) {
 	if(outFile != "")
 		printf("Done!\n");
 
-	delete input;
-	delete output;
+	if(input != NULL) delete input;
+	if(output != NULL) delete output;
 	return 0;
 }

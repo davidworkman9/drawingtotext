@@ -1,7 +1,5 @@
 /****************************************************************************
-** $Id: dl_dxf.h 8865 2008-02-04 18:54:02Z andrew $
-**
-** Copyright (C) 2001-2003 RibbonSoft. All rights reserved.
+** Copyright (C) 2001-2011 RibbonSoft. All rights reserved.
 **
 ** This file is part of the dxflib project.
 **
@@ -53,7 +51,7 @@ class DL_CreationInterface;
 class DL_WriterA;
 
 
-#define DL_VERSION     "2.2.0.0"
+#define DL_VERSION     "2.5.0.0"
 
 #define DL_UNKNOWN               0
 #define DL_LAYER                10
@@ -186,7 +184,7 @@ public:
 	int  stringToInt(const char* s, bool* ok=NULL);	
 
     DL_WriterA* out(const char* file,
-                    DL_Codes::version version=VER_2000);
+                    DL_Codes::version version=DL_VERSION_2000);
 
     void writeHeader(DL_WriterA& dw);
 
@@ -342,9 +340,9 @@ public:
     static int toInt(const char* value, int def=0) {
         if (value!=NULL && value[0] != '\0') {
             return atoi(value);
-        } else {
-            return def;
         }
+
+        return def;
     }
     /**
      * Converts the given string into a string or returns the given 
