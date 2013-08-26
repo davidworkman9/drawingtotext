@@ -40,6 +40,10 @@ cd dxflib
 
 Once you've installed dxflib and LibreDWG, back up to the project directory and run "make".
 This should make an execuable file named drawingtotext.
+
+If you get a error about linking shared library LibreDWG run this command
+ldconfig
+
 Move drawingtotext to /usr/local/bin (mv drawingtotext /usr/local/bin) so it can be accessed via the command line from anywhere.
 	- Down the road we will hopefully modify the makefile to have an install command.
 
