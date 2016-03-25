@@ -5,7 +5,7 @@ InputFormatDWG::InputFormatDWG(const char * inputFilename) {
 	this->dwg = new Dwg_Data();
 	int errno = dwg_read_file((char *)inputFilename, this->dwg);
 	if (errno) {
-		fprintf(stderr, "Could not open DWG. Returned error code: $d\n", errno);
+		fprintf(stderr, "Could not open DWG. Returned error code: %d\n", errno);
 		delete this->dwg;
 	}
 
